@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<style>
+   body mark {
+       background-color: yellow;
+   }
+</style>
+<head>
+   <meta charset="UTF-8">
+   <title>Madlibs</title>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+   <!--<script>
+        var password = "tutorial";
+        (function passcodeprotect() {
+           var passcode = prompt("Enter PassCode");
+           while (passcode !== password) {
+              alert("Incorrect PassCode");
+              return passcodeprotect();
+           }
+        }());
+        alert('Welcome!');
+     </script>-->
+</head>
+
+
+<body>
+<br>
+<section class="blog-list px-3 py-5 p-md-5">
+          <div class="container">
+           <p>How to play: Madlibs is a template word game created by Leonard Stern and Roger Price. You will be given prompts
+           for a list of words that will be substituted in blanks in a story. Fill in the blanks to reveal the story!</p>
+               <h1 class="text-center font-weight-bold" style="font-size:36px;">Madlibs </h1>
+          </div>
+</section>
+   <div class="container">
+
+
+     <!-- start form -->
+     <div id="questions">
+       <h1>Please fill out the following!</h1>
+       <hr>
+       <form role="form">
+         <div class="form-group">
+           <label for="animal">Animal</label>
+           <input id="animal" class="form-control animal" type="text" placeholder="Enter an animal ...">
+         </div>
+         <div class="form-group">
+           <label for="adjective">Adjective</label>
+           <input id="adjective" class="form-control adjective" type="text" placeholder="Enter an adjective ...">
+         </div>
+         <div class="form-group">
+           <label for="place">Place</label>
+           <input id="place" class="form-control place" type="text" placeholder="Enter a place ...">
+         </div>
+         <div class="form-group">
+           <label for="verb">Verb</label>
+           <input id="verb" class="form-control verb" type="text" placeholder="Enter a verb ...">
+         </div>
+         <div class="form-group">
+           <label for="adjective2">Another adjective</label>
+           <input id="adjective2" class="form-control adjective2" type="text" placeholder="Enter another adjective ...">
+         </div>
+         <div class="form-group">
+           <label for="candy">Candy</label>
+           <input id="candy" class="form-control candy" type="text" placeholder="Enter the name of a candy ...">
+         </div>
+         <div>
+         </div>
+       </form>
+       <button id="btn-click" type="submit" class="btn btn-primary btn-lg">Generate!</button>
+       <hr>
+     </div>
+     <!-- end form -->
+
+
+     <!-- start story -->
+     <div id="story">
+       <hr>
+             <h4>
+                 Himona ma̱, nita hohchʋffo yʋt ko̱wi hiki̱a tuk. <mark><span class="animal"></span></mark>
+                 <mark><span class="adjective"></span></mark> pi̱sa tuk.
+                 <mark><span class="animal"></span></mark> pʋt
+                 <mark><span class="place"></span></mark> anta tuk.
+                 Nita okpulo mʋt <mark><span class="animal"></span></mark> ossi ʋpat pisa tuk.
+                 <mark><span class="animal"></span></mark> yʋt balilit isht ia tuk.
+                 Ilʋppʋt pʋlhki hosh pit <mark><span class="verb"></span></mark> tuk.
+                 Iti <mark><span class="adjective2"></span></mark> ona tuk.
+                 Nita yʋt yʋmma ʋpa tuk kiyo.
+                 Nita yʋt himmak ma̱ sʋlaha hosh iti ia tuk.
+                 <mark><span class="animal"></span></mark> ossi ʋt yʋmma pisa tuk.
+                 <mark><span class="animal"></span></mark>, "Anusi ma
+                 <mark><span class="candy"></span></mark> i̱shi li, chi bʋnna ?"
+                 Nita micha <mark><span class="animal"></span></mark> yʋt nowat itiachi tuk.
+           </h4>
+
+
+         <div>
+         <button type="submit" class="btn btn-primary btn-lg" id="play-btn">Play Again?</button>
+       </div>
+     </div>
+     <!-- end story -->
+
+
+
+
+   </div>
+   <!-- scripts -->
+   <script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+<script>
+$(function() {
+
+
+   // hide the story from view
+   $("#story").hide();
+
+
+   // Function to capitalize the first letter of a string
+   function capitalizeFirstLetter(string) {
+       return string.charAt(0).toUpperCase() + string.slice(1);
+   }
+
+
+   // ---- event handler ---- //
+   $("#btn-click").click(function(e) {
+
+
+       e.preventDefault();
+
+
+       // grab the values from the input boxes, capitalize them, then append them to the DOM
+       $(".animal").empty().append(capitalizeFirstLetter($("input.animal").val()));
+       $(".adjective").empty().append($("input.adjective").val());
+       $(".place").empty().append($("input.place").val());
+       $(".verb").empty().append($("input.verb").val());
+       $(".adjective2").empty().append($("input.adjective2").val());
+       $(".candy").empty().append(capitalizeFirstLetter($("input.candy").val()));
+
+
+       // show the story
+       $("#story").show();
+
+
+       // empty the form's values
+       $(':input').val('');
+
+
+       // hide the questions
+       $("#questions").hide();
+
+
+   });
+
+
+   // ---- event handler ---- //
+   $("#play-btn").click(function(e) {
+       $("#questions").show();
+       $("#story").hide();
+   });
+
+
+});
+</script>
+
+
+
+
+</body>
+</html>
